@@ -15,6 +15,10 @@ addons:
   apt:
     packages:
     - gcc-multilib
+    - lcov
+
+install:
+  - gem install coveralls-lcov
 
 env:
   global:
