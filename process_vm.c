@@ -41,12 +41,12 @@ SYS_FUNC(process_vm_readv)
 		/* arg 2: local iov */
 		tprint_iov_upto(tcp, local_iovcnt, tcp->u_arg[1],
 			   syserror(tcp) ? IOV_DECODE_ADDR : IOV_DECODE_STR,
-			   tcp->u_rval);
+			   tcp->u_rval, NULL);
 		/* arg 3: local iovcnt */
 		tprintf(", %" PRI_klu ", ", local_iovcnt);
 		/* arg 4: remote iov */
 		tprint_iov(tcp, remote_iovcnt, tcp->u_arg[3],
-			   IOV_DECODE_ADDR);
+			   IOV_DECODE_ADDR, NULL);
 		/* arg 5: remote iovcnt */
 		/* arg 6: flags */
 		tprintf(", %" PRI_klu ", %" PRI_klu, remote_iovcnt, flags);
@@ -63,11 +63,11 @@ SYS_FUNC(process_vm_writev)
 	/* arg 1: pid */
 	tprintf("%d, ", (int) tcp->u_arg[0]);
 	/* arg 2: local iov */
-	tprint_iov(tcp, local_iovcnt, tcp->u_arg[1], IOV_DECODE_STR);
+	tprint_iov(tcp, local_iovcnt, tcp->u_arg[1], IOV_DECODE_STR, NULL);
 	/* arg 3: local iovcnt */
 	tprintf(", %" PRI_klu ", ", local_iovcnt);
 	/* arg 4: remote iov */
-	tprint_iov(tcp, remote_iovcnt, tcp->u_arg[3], IOV_DECODE_ADDR);
+	tprint_iov(tcp, remote_iovcnt, tcp->u_arg[3], IOV_DECODE_ADDR, NULL);
 	/* arg 5: remote iovcnt */
 	/* arg 6: flags */
 	tprintf(", %" PRI_klu ", %" PRI_klu, remote_iovcnt, flags);

@@ -41,7 +41,7 @@ print_sg_io_buffer(struct tcb *const tcp, const kernel_ulong_t addr,
 {
 	if (iovec_count) {
 		tprint_iov_upto(tcp, iovec_count, addr, IOV_DECODE_STR,
-				data_size);
+				data_size, NULL);
 	} else {
 		printstr_ex(tcp, addr, data_size, QUOTE_FORCE_HEX);
 	}

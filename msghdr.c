@@ -354,7 +354,7 @@ print_struct_msghdr(struct tcb *tcp, const struct msghdr *msg,
 	tprints(", msg_iov=");
 
 	tprint_iov_upto(tcp, msg->msg_iovlen,
-			ptr_to_kulong(msg->msg_iov), decode, data_size);
+			ptr_to_kulong(msg->msg_iov), decode, data_size, NULL);
 	tprintf(", msg_iovlen=%" PRI_klu, (kernel_ulong_t) msg->msg_iovlen);
 
 	decode_msg_control(tcp, ptr_to_kulong(msg->msg_control),

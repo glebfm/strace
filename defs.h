@@ -602,7 +602,7 @@ extern void printsignal(int);
 
 extern void
 tprint_iov_upto(struct tcb *, kernel_ulong_t len, kernel_ulong_t addr,
-		enum iov_decode, kernel_ulong_t data_size);
+		enum iov_decode, kernel_ulong_t data_size, void *);
 
 extern void
 decode_netlink(struct tcb *, kernel_ulong_t addr, kernel_ulong_t len);
@@ -702,9 +702,9 @@ printxval(const struct xlat *x, const unsigned int val, const char *dflt)
 
 static inline void
 tprint_iov(struct tcb *tcp, kernel_ulong_t len, kernel_ulong_t addr,
-	   enum iov_decode decode_iov)
+	   enum iov_decode decode_iov, void *optional_data)
 {
-	tprint_iov_upto(tcp, len, addr, decode_iov, -1);
+	tprint_iov_upto(tcp, len, addr, decode_iov, -1, optional_data);
 }
 
 #ifdef ALPHA
