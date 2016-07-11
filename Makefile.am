@@ -171,6 +171,7 @@ strace_SOURCES =	\
 	native_defs.h	\
 	net.c		\
 	netlink.c       \
+	netlink.h	\
 	netlink_sock_diag.c \
 	nsig.h		\
 	numa.c		\
@@ -214,6 +215,7 @@ strace_SOURCES =	\
 	rt_sigframe.c	\
 	rt_sigreturn.c	\
 	rtc.c		\
+	rtnetlink.c	\
 	sched.c		\
 	sched_attr.h	\
 	scsi.c		\

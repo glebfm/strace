@@ -295,6 +295,7 @@ extern const struct xlat addrfams[];
 extern const struct xlat at_flags[];
 extern const struct xlat dirent_types[];
 extern const struct xlat evdev_abs[];
+extern const struct xlat iffflags[];
 extern const struct xlat msg_flags[];
 extern const struct xlat open_access_modes[];
 extern const struct xlat open_mode_flags[];
@@ -610,7 +611,8 @@ decode_netlink(struct tcb *, int, kernel_ulong_t addr, kernel_ulong_t len);
 extern void
 decode_netlink_sock_diag(struct tcb *, unsigned long, unsigned long,
 				     unsigned int, int);
-
+extern void
+decode_rtnetlink(struct tcb *, unsigned long, unsigned long, unsigned);
 extern void tprint_open_modes(unsigned int);
 extern const char *sprint_open_modes(unsigned int);
 
