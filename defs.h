@@ -607,6 +607,10 @@ tprint_iov_upto(struct tcb *, kernel_ulong_t len, kernel_ulong_t addr,
 extern void
 decode_netlink(struct tcb *, int, kernel_ulong_t addr, kernel_ulong_t len);
 
+extern void
+decode_netlink_sock_diag(struct tcb *, unsigned long, unsigned long,
+				     unsigned int, int);
+
 extern void tprint_open_modes(unsigned int);
 extern const char *sprint_open_modes(unsigned int);
 
