@@ -613,6 +613,8 @@ decode_netlink_sock_diag(struct tcb *, unsigned long, unsigned long,
 				     unsigned int, int);
 extern void
 decode_rtnetlink(struct tcb *, unsigned long, unsigned long, unsigned);
+extern unsigned long decode_nlattr(struct tcb *, unsigned long ,unsigned long,
+				   const struct xlat*, const char *);
 extern void tprint_open_modes(unsigned int);
 extern const char *sprint_open_modes(unsigned int);
 
