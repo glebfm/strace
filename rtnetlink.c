@@ -47,6 +47,7 @@
 #include "xlat/rtm_table.h"
 #include "xlat/ndm_state.h"
 #include "xlat/ndm_flags.h"
+#include "xlat/netlink_route_types.h"
 #include "xlat/dcb_commands.h"
 #include "xlat/rtnetlink_link_attr.h"
 #include "xlat/rtnetlink_addr_attr.h"

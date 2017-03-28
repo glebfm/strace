@@ -50,6 +50,9 @@
 #include <linux/netconf.h>
 #include <arpa/inet.h>
 
+#include "xlat.h"
+#include "xlat/netlink_route_types.h"
+
 #if !defined NETLINK_SOCK_DIAG && defined NETLINK_INET_DIAG
 # define NETLINK_SOCK_DIAG NETLINK_INET_DIAG
 #endif
