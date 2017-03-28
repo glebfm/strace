@@ -75,6 +75,15 @@ decode_nlattr_data(struct tcb *tcp, unsigned long addr, unsigned long len,
 		return;
 	}
 
+#define PRINT_NLA(type, fmt)					\
+	do {							\
+		type n;						\
+		if (len < sizeof(n) || umove(tcp, addr, &n))	\
+			printstrn(tcp, addr, len);		\
+		else						\
+			tprintf("%" fmt, n);			\
+	} while (0)
+
 	switch (policy[nla_type].type) {
 	case NLA_STRING: case NLA_NUL_STRING:
 		if (policy[nla_type].len == 0 || len < policy[nla_type].len)
@@ -82,70 +91,30 @@ decode_nlattr_data(struct tcb *tcp, unsigned long addr, unsigned long len,
 		else
 			printstrn(tcp, addr, len);
 		break;
-	case NLA_U64: {
-		uint64_t n;
-		if (len >= 8 && umove(tcp, addr, &n))
-			printstrn(tcp, addr, len);
-		else
-			tprintf("%lu", n);
+	case NLA_U64:
+		PRINT_NLA(uint64_t, PRIu64);
 		break;
-	}
-	case NLA_U32: {
-		uint32_t n;
-		if (len >= 4 && umove(tcp, addr, &n))
-			printstrn(tcp, addr, len);
-		else
-			tprintf("%u", n);
+	case NLA_U32:
+		PRINT_NLA(uint32_t, PRIu32);
 		break;
-	}
-	case NLA_U16: {
-		uint16_t n;
-		if (len >= 2 && umove(tcp, addr, &n))
-			printstrn(tcp, addr, len);
-		else
-			tprintf("%u", n);
+	case NLA_U16:
+		PRINT_NLA(uint16_t, PRIu16);
 		break;
-	}
-	case NLA_U8: {
-		uint8_t n;
-		if (len >= 1 && umove(tcp, addr, &n))
-			printstrn(tcp, addr, len);
-		else
-			tprintf("%u", n);
+	case NLA_U8:
+		PRINT_NLA(uint8_t, PRIu8);
 		break;
-	}
-	case NLA_S64: {
-		int64_t n;
-		if (len >= 8 && umove(tcp, addr, &n))
-			printstrn(tcp, addr, len);
-		else
-			tprintf("%ld", n);
+	case NLA_S64:
+		PRINT_NLA(int64_t, PRId64);
 		break;
-	}
-	case NLA_S32: {
-		int32_t n;
-		if (len >= 4 && umove(tcp, addr, &n))
-			printstrn(tcp, addr, len);
-		else
-			tprintf("%d", n);
+	case NLA_S32:
+		PRINT_NLA(int32_t, PRId32);
 		break;
-	}
-	case NLA_S16: {
-		int16_t n;
-		if (len >= 2 && umove(tcp, addr, &n))
-			printstrn(tcp, addr, len);
-		else
-			tprintf("%d", n);
+	case NLA_S16:
+		PRINT_NLA(int16_t, PRId16);
 		break;
-	}
-	case NLA_S8: {
-		int8_t n;
-		if (len >= 1 && umove(tcp, addr, &n))
-			printstrn(tcp, addr, len);
-		else
-			tprintf("%d", n);
+	case NLA_S8:
+		PRINT_NLA(int8_t, PRId8);
 		break;
-	}
 	default:
 		if (fallback_parser)
 			if ((*fallback_parser) (tcp, addr, len, nla_type, family))
